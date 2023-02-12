@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cart">
+
+	<select id="cartOne" resultType="cart">
+		select * from drink where serial = #{drink_serial}
+	</select>
+	
+	<select id="nextCainsertcartInnerrt" resultType="int">
+		select cart_serial.nextval  from dual
+	</select>
+	
+	<select resultType="int" id="nextCart">
+	select sequence.nextval from dual 
+	</select>
+	
+	<select id="insertCart" parameterType="map">
+		insert into cart values(#{nextCart}, sysdate, #{consumer_serial}) 
+	
+	</select>
+	
+	<select id="insertcartInner" parameterType="map">
+	insert into cartInner values(#{cart_serial}, #{drink_serial}, 1, #{drink_price})
+	</select>
+	
+	
+	<select id="cartSelectOne" parameterType="string" resultType="cart">
+		select * from cart where consumer_serial = #{consumer_serial}
+	</select>
+
+
+	<select id="cartInnerSelectOne" resultType="cart">
+		select * 
+		from cartInner
+		where cart_serial = #{cart_serial}
+	</select>
+	<select id="cartInnerSelectAll"  resultType="cartInner">
+	select a.cart_serial 
+		,a.drink_serial 
+		,a.cart_qty 
+		,a.cart_price 
+		,d.name 
+		,d.price 
+		,d.file1
+	 from cartInner a , drink d  
+	 where a.drink_serial = d.serial 
+	 		and a.cart_serial = #{cart_serial}
+
+	</select>
+	
+	<select id="cartList" resultType="cartInner">
+		select * from cartInner left join drink on cartInner.drink_serial = #{serial}
+	</select>
+	
+
+	<delete id="deleteCart" parameterType="string">
+		delete from cartInner
+		where drink_serial = #{drink_serial}
+	</delete>
+
+
+
+</mapper>

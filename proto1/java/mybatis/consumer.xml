@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="consumer">
+
+	<insert id="insertConsumer" parameterType="consumer">
+		insert into consumer
+			values(TO_NUMBER(TO_CHAR(SYSDATE, 'YYYYMMDD')||LPAD(BOARDSEQ.nextval, 5, '0')),#{id}, #{pass}, #{name},#{jumin},  #{address}, #{tel}, #{email},1)
+	</insert>
+
+	<select id="selectOne" resultType="consumer" parameterType="string">
+		select * from consumer where id = #{value}
+	</select>
+
+	<update id="updateConsumer" parameterType="consumer">
+		update consumer set
+		name = #{name}, jumin= #{jumin}, tel = #{tel}, address = #{address},
+		email = #{email}
+		where id = #{id} and pass = #{pass}
+	</update>
+
+	<delete id="deleteConsumer" parameterType="string">
+		delete from consumer where id = #{id}
+	</delete>
+
+	<update id="changePass" parameterType="map">
+		update consumer set pass = #{pass} where id = #{id}
+	</update>
+
+	<select id="ConsumerList" resultType="consumer">
+		select * from consumer
+	</select>
+	
+	<update id="addUpdateScript" parameterType="String">
+		update consumer set subscript = 2 where id = #{id}
+		
+	</update>
+	<update id="deleteUpdateScript" parameterType="String">
+		update consumer set subscript = 1 where id = #{id}
+		
+	</update>
+	<select id="submyList" resultType="string">
+		select subscript from consumer where id = #{id}
+	</select>
+	<select id="selectOneCon" resultType="consumer">
+        select * from consumer where id = #{value}
+    </select>
+</mapper>

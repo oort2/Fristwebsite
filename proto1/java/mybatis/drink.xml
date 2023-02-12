@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="drink">
+
+	<insert id="insertDrink" parameterType="drink">
+		insert into drink
+		values(BOARDSEQ.nextval, sysdate, #{name}, ${capacity}, ${alcohol}, #{brand}, #{released}, #{price}, #{location}, #{saled}, #{file1}, #{qty}, #{dtype}, null)
+	</insert>
+
+	<select id="selectOne" resultType="drink">
+		select * from drink where serial = #{value}
+	</select>
+
+	<update id="updateDrink" parameterType="drink">
+		update drink set
+		 regdate = #{regdate}, file1 = #{file1}, name = #{name}, capacity = ${capacity}, alcohol = ${alcohol}, brand = #{brand}, released = #{released}, price = #{price},
+		location = #{location}, saled = #{saled}, qty = #{qty}, dtype = #{dtype} where serial = ${serial}
+	</update>
+
+	<delete id="deleteDrink" parameterType="string">
+		delete from drink where serial = #{serial} 
+	</delete>
+
+	<select id="drinkList" resultType="drink">
+		select * from drink order by serial desc 
+	</select>
+	
+	<select id="drinkListsaled" resultType="drink">
+		select * from drink order by saled
+	</select>
+	
+	<select id="drinkListhigh" resultType="drink">
+		select * from drink order by price desc 
+	</select>
+	<select id="drinkListlow" resultType="drink">
+		select * from drink order by price asc
+	</select>
+	<select id="drinkListricewine" resultType="drink">
+		select * from drink where dtype = '막걸리'
+	</select>
+	<select id="drinkListsoju" resultType="drink">
+		select * from drink where dtype = '소주'
+	</select>
+	
+	<select id="selectLocation" resultType="drink">
+     select * from drink where location = #{value}
+	</select>
+	
+		<select id="selectInterest" resultType="drink"   parameterType="map">
+      select serial, name, price, dtype  from drink d, interest  i
+        where d.serial=i.drinkserial and consumerid = #{consumerid}
+   </select>
+   
+   <select id="selectsearch" resultType="drink">
+		select * 
+		from drink
+		where name like '%'||#{name}||'%'
+	</select>
+</mapper>

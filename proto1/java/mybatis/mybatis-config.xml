@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org/DTD config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<settings>
+<setting name="jdbcTypeForNull" value="NULL" />
+</settings>
+
+
+<typeAliases>
+<typeAlias type = "model.Consumer1" alias = "consumer" />
+	<typeAlias type = "model.Board" alias = "board" />
+	<typeAlias type = "model.Drink" alias = "drink" />
+	<typeAlias type = "model.Interest" alias = "interest" />
+	<typeAlias type = "model.Subscript" alias = "subscript" />
+	<typeAlias type = "model.Cart" alias = "cart" />
+	<typeAlias type = "model.CartInner" alias = "CartInner" />
+	<typeAlias type = "model.Order1" alias = "order1" />
+	<typeAlias type = "model.OrderDetail" alias = "orderdetail" />
+</typeAliases>
+
+<mappers>
+	<mapper resource = "mybatis/consumer.xml"/>
+	<mapper resource = "mybatis/board.xml"/>
+	<mapper resource = "mybatis/drink.xml"/>
+	<mapper resource = "mybatis/subscript.xml"/>
+	<mapper resource = "mybatis/cart.xml"/>
+	<mapper resource="mybatis/order.xml" />
+	<mapper resource = "mybatis/interest.xml"/>
+</mappers>
+</configuration>

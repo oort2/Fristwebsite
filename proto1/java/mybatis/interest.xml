@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="interest">
+
+	<insert id="insertInterest" parameterType="map">
+		insert into interest
+		values(interestserial.nextval, #{consumerid}, #{drinkserial})
+	</insert>
+
+	<select id="selectOne" resultType="interest" parameterType="map">
+		select * from interest where drinkserial = #{drinkserial} and
+		consumerid = #{consumerid}
+	</select>
+
+	<select id="interestList" resultType="interest">
+		select * from interest
+	</select>
+
+	<delete id="deleteInterest" parameterType="string">
+		delete from interest
+		where drinkserial = #{drinkserial} and consumerid = #{consumerid} 
+	</delete>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="subscript">
+	<update id="updateInsertDrink" parameterType="string">
+		update drink set s_product = 'A' where serial = #{serial}
+	</update>
+	
+	<insert id="insertSubscript" parameterType="string">
+		insert into subscript
+		values('sub'||lpad(subscriptserial.nextval,3,'0'), #{serial}, 'A')
+	</insert>
+	
+	<select id="selectOne" resultType="subscript" parameterType="string">
+		select * from subscript where subscriptserial = #{subscriptserial}
+	</select>
+	<update id="updateDeleteDrink" parameterType="string">
+		update drink set s_product = 'null' where serial = #{serial}
+	</update>
+	<delete id="deleteSubscript" parameterType="string">
+		delete from subscript
+		where drinkserial = #{drinkserial}
+	</delete>
+	<select id="drinkList" resultType="drink">
+		select * from Drink where s_product = 'A' and rownum &lt; 5
+	</select>
+</mapper>
